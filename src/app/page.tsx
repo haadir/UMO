@@ -1,103 +1,108 @@
+"use client";
+
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 export default function Home() {
+  const router = useRouter();
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
+    <div className="min-h-screen w-full flex items-center justify-center bg-gradient-to-br from-[#18114B] via-[#3a3a6a] to-[#c3defa]">
+      <main
+        className="bg-[#C3DEFA] w-full h-full max-w-[393px] max-h-[853px] rounded-[2.5rem] shadow-2xl flex flex-col items-center px-4 py-6 mx-auto
+        sm:my-8 sm:h-auto sm:rounded-[2.5rem] sm:shadow-2xl"
+        style={{ minHeight: "600px" }}
+      >
+        {/* Top Spacing for status bar */}
+        <div className="h-6 w-full" />
+        {/* Welcome Text */}
+        <h1
+          className="text-[1.7rem] font-bold text-center mb-2 text-[#18114B]"
+          style={{ fontFamily: "var(--font-fredoka)" }}
+        >
+          Welcome to
+        </h1>
+        {/* UMO Logo (larger) */}
         <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
+          src="/umo-logo.svg"
+          alt="UMO logo"
+          width={150}
+          height={150}
+          className="mb-2"
         />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+        {/* Subtitle */}
+        <div
+          className="text-lg font-bold text-center mb-4 text-[#18114B] leading-tight"
+          style={{ fontFamily: "var(--font-fredoka)" }}
+        >
+          The AI-driven App
+          <br />
+          for Your Memories
+        </div>
+        {/* Section Prompt */}
+        <div
+          className="text-base font-bold text-center mb-4 text-[#18114B]"
+          style={{ fontFamily: "var(--font-fredoka)" }}
+        >
+          Select how you'll be using the app:
+        </div>
+        {/* Buttons */}
+        <div className="flex flex-col gap-5 w-full">
+          {/* Sign Up Button */}
+          <button
+            className="bg-white border border-[#18114B] rounded-2xl py-4 px-2 flex flex-col items-center shadow-md hover:bg-[#e6f0fa] transition w-full"
+            onClick={() => router.push("/onboarding/name")}
           >
+            <span
+              className="text-lg font-bold text-[#18114B] mb-2"
+              style={{ fontFamily: "var(--font-fredoka)" }}
+            >
+              Sign Up
+            </span>
             <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
+              src="/icons/signup-icon.svg"
+              alt="Sign Up Icon"
+              width={48}
+              height={48}
+              className="mb-2"
             />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+            <span
+              className="text-base text-[#18114B] font-normal leading-tight"
+              style={{ fontFamily: "var(--font-fredoka)" }}
+            >
+              Create an account
+              <br />
+              as a new user
+            </span>
+          </button>
+          {/* Login Button */}
+          <button
+            className="bg-white border border-[#18114B] rounded-2xl py-4 px-2 flex flex-col items-center shadow-md hover:bg-[#e6f0fa] transition w-full"
+            onClick={() => router.push("/onboarding/name")}
           >
-            Read our docs
-          </a>
+            <span
+              className="text-lg font-bold text-[#18114B] mb-2"
+              style={{ fontFamily: "var(--font-fredoka)" }}
+            >
+              Login
+            </span>
+            <Image
+              src="/icons/login-icon.svg"
+              alt="Login Icon"
+              width={48}
+              height={48}
+              className="mb-2"
+            />
+            <span
+              className="text-base text-[#18114B] font-normal leading-tight"
+              style={{ fontFamily: "var(--font-fredoka)" }}
+            >
+              Already have
+              <br />
+              an account
+            </span>
+          </button>
         </div>
       </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
     </div>
   );
 }
