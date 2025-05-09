@@ -67,7 +67,7 @@ export default function MemoryCapturePage() {
         {/* Speech Visual */}
         <div className="flex flex-col items-center justify-center flex-1">
           <Image
-            src="/speech.svg"
+            src="/Speech.svg"
             alt="Speech Visual"
             width={280}
             height={280}
