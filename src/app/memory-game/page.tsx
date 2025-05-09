@@ -1,36 +1,51 @@
 "use client";
-import { useSearchParams, useRouter } from "next/navigation";
-import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 
 export default function MemoryGamePage() {
-  const params = useSearchParams();
   const router = useRouter();
-  const question = params.get("question") || "";
-  const imageUrl = params.get("imageUrl") || "";
-  const answers = (() => {
-    try {
-      return JSON.parse(params.get("answers") || "[]");
-    } catch {
-      return [];
+  const [query, setQuery] = useState({
+    question: "",
+    imageUrl: "",
+    answers: [],
+    correct: "",
+    transcript: "",
+  });
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const params = new URLSearchParams(window.location.search);
+      setQuery({
+        question: params.get("question") || "",
+        imageUrl: params.get("imageUrl") || "",
+        answers: (() => {
+          try {
+            return JSON.parse(params.get("answers") || "[]");
+          } catch {
+            return [];
+          }
+        })(),
+        correct: params.get("correct") || "",
+        transcript:
+          params.get("transcript") ||
+          (typeof window !== "undefined"
+            ? localStorage.getItem("umo_last_transcript") || ""
+            : ""),
+      });
+      // Save transcript to localStorage for next/refresh
+      if (params.get("transcript")) {
+        localStorage.setItem("umo_last_transcript", params.get("transcript")!);
+      }
     }
-  })();
-  const correct = params.get("correct") || "";
+  }, [typeof window !== "undefined" ? window.location.search : ""]);
+  const question = query.question;
+  const imageUrl = query.imageUrl;
+  const answers = query.answers as string[];
+  const correct = query.correct;
+  const transcript = query.transcript;
   const [selected, setSelected] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-
-  // Try to get transcript from query param or localStorage
-  const transcript =
-    params.get("transcript") ||
-    (typeof window !== "undefined"
-      ? localStorage.getItem("umo_last_transcript")
-      : "");
-
-  // Save transcript to localStorage for next/refresh
-  if (typeof window !== "undefined" && params.get("transcript")) {
-    localStorage.setItem("umo_last_transcript", params.get("transcript")!);
-  }
 
   const handleNext = async () => {
     if (!transcript) {
